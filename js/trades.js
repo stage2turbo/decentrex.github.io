@@ -48036,7 +48036,7 @@ module.exports={
         "spec": ">=2.2.0 <2.3.0",
         "type": "range"
       },
-      "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/request"
+      "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/request"
     ]
   ],
   "_from": "tough-cookie@>=2.2.0 <2.3.0",
@@ -48070,7 +48070,7 @@ module.exports={
   "_shasum": "c83a1830f4e5ef0b93ef2a3488e724f8de016ac7",
   "_shrinkwrap": null,
   "_spec": "tough-cookie@~2.2.0",
-  "_where": "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/request",
+  "_where": "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/request",
   "author": {
     "name": "Jeremy Stashewsky",
     "email": "jstashewsky@salesforce.com"
@@ -60427,7 +60427,7 @@ const sha3 = require('web3/lib/utils/sha3.js');
 const SolidityEvent = require('web3/lib/web3/event.js');
 const stats = require('stats-lite');
 
-const addressDecentrEx = '0x8d12a197cb00d4747a1fe03395095ce2a5cc6819';
+const addressKapoEx = '0x8d12a197cb00d4747a1fe03395095ce2a5cc6819';
 const addressToken = '0xAf30D2a7E90d7DC361c8C4585e9BB7D2F6f15bc7';
 
 const web3 = new Web3();
@@ -60436,7 +60436,7 @@ web3.setProvider(new Web3.providers.HttpProvider(provider));
 
 function TradeUtil() {
   const self = this;
-  self.contractDecentrEx = null;
+  self.contractKapoEx = null;
   self.contractToken = null;
   self.blockNumber = 0;
   self.latestBlock = 0;
@@ -60474,12 +60474,12 @@ function TradeUtil() {
   };
 
   self.getContract = function getContract(callback) {
-    self.get(`https://api.etherscan.io/api?module=contract&action=getabi&address=${addressDecentrEx}`, (err, data) => {
+    self.get(`https://api.etherscan.io/api?module=contract&action=getabi&address=${addressKapoEx}`, (err, data) => {
       if (err) throw new Error(err);
       const abi = JSON.parse(data.result);
-      self.contractDecentrEx = web3.eth.contract(abi);
-      self.contractDecentrEx = self.contractDecentrEx.at(addressDecentrEx);
-      callback(null, self.contractDecentrEx);
+      self.contractKapoEx = web3.eth.contract(abi);
+      self.contractKapoEx = self.contractKapoEx.at(addressKapoEx);
+      callback(null, self.contractKapoEx);
     });
   };
 
@@ -60509,7 +60509,7 @@ function TradeUtil() {
 
   self.getLog = function getLog(fromBlock, toBlock, callback) {
     function decodeEvent(item) {
-      const eventAbis = self.contractDecentrEx.abi.filter(eventAbi => (
+      const eventAbis = self.contractKapoEx.abi.filter(eventAbi => (
           eventAbi.type === 'event' &&
           item.topics[0] ===
             `0x${
@@ -60523,14 +60523,14 @@ function TradeUtil() {
         ));
       if (eventAbis.length > 0) {
         const eventAbi = eventAbis[0];
-        const event = new SolidityEvent(web3, eventAbi, addressDecentrEx);
+        const event = new SolidityEvent(web3, eventAbi, addressKapoEx);
         const result = event.decode(item);
         return result;
       }
       return null;
     }
     const url =
-      `https://api.etherscan.io/api?module=logs&action=getLogs&address=${addressDecentrEx}&fromBlock=${fromBlock}&toBlock=${toBlock}`;
+      `https://api.etherscan.io/api?module=logs&action=getLogs&address=${addressKapoEx}&fromBlock=${fromBlock}&toBlock=${toBlock}`;
     self.get(url, (err, data) => {
       if (!err) {
         try {

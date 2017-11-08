@@ -1,11 +1,11 @@
 /* eslint-env browser */
 
 module.exports = {
-  homeURL: 'https://decentrex.com',
-  contractDecentrEx: 'smart_contract/decentrex.sol',
+  homeURL: 'https://KapoEx.com',
+  contractKapoEx: 'smart_contract/KapoEx.sol',
   contractToken: 'smart_contract/token.sol',
   contractReserveToken: 'smart_contract/reservetoken.sol',
-  contractDecentrExAddrs: [
+  contractKapoExAddrs: [
     { addr: '0xbf29685856fae1e228878dfb35b280c0adcc3b05', info: 'Deployed 05/26/2017' },
   ],
   ethTestnet: false,
@@ -19,11 +19,11 @@ module.exports = {
   gasTrade: 250000,
   gasOrder: 250000,
   ordersOnchain: false,
-  apiServer: 'https://api.decentrex.com',
-  userCookie: 'DecentrEx',
-  eventsCacheCookie: 'DecentrEx_eventsCache',
-  deadOrdersCacheCookie: 'DecentrEx_deadOrdersCache',
-  ordersCacheCookie: 'DecentrEx_ordersCache',
+  apiServer: 'https://api.KapoEx.com',
+  userCookie: 'KapoEx',
+  eventsCacheCookie: 'KapoEx_eventsCache',
+  deadOrdersCacheCookie: 'KapoEx_deadOrdersCache',
+  ordersCacheCookie: 'KapoEx_ordersCache',
   etherscanAPIKey: 'KF9ADFTHP4WJF1GV3WHJZCTFZIN5XZUXG1',
   tokens: [
 { addr: '0x0000000000000000000000000000000000000000', name: 'ETH', decimals: 18 },

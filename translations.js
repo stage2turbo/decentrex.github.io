@@ -24,17 +24,17 @@ module.exports = {
     es: 'Español',
   },
   title: {
-    en: 'DecentrEx',
-    cn: 'DecentrEx',
-    fr: 'DecentrEx',
-    es: 'DecentrEx',
+    en: 'KapoEx',
+    cn: 'KapoEx',
+    fr: 'KapoEx',
+    es: 'KapoEx',
   },
   description: {
-    en: 'DecentrEx is a decentralized exchange for Ethereum tokens.',
-    cn: 'DecentrEx是去中心化的以太坊交易平台。',
-    fr: "DecentrEx est une bourse d'échange de jetons ethereum décentralisé.",
-    es: 'DecentrEx se ha posicionado como la primera bolsa de cambio de cryptomonedas y symbolicos de la blockchain Ethereum.',
-    // cn:'DecentrEx是无中心的以太坊交易平台。'
+    en: 'KapoEx is a decentralized exchange for Ethereum tokens.',
+    cn: 'KapoEx是去中心化的以太坊交易平台。',
+    fr: "KapoEx est une bourse d'échange de jetons ethereum décentralisé.",
+    es: 'KapoEx se ha posicionado como la primera bolsa de cambio de cryptomonedas y symbolicos de la blockchain Ethereum.',
+    // cn:'KapoEx是无中心的以太坊交易平台。'
   },
   Smart_Contract: {
     en: 'Smart Contract',
@@ -103,10 +103,10 @@ module.exports = {
     es: 'Profundidad',
   },
   only_7_days: {
-    en: 'Note: DecentrEx will only show recent transactions.',
-    cn: '注意：DecentrEx只会显示最近的交易。',
-    fr: 'Remarque: DecentrEx affichera uniquement les transactions récentes.',
-    es: 'Nota: DecentrEx sólo mostrará transacciones recientes.',
+    en: 'Note: KapoEx will only show recent transactions.',
+    cn: '注意：KapoEx只会显示最近的交易。',
+    fr: 'Remarque: KapoEx affichera uniquement les transactions récentes.',
+    es: 'Nota: KapoEx sólo mostrará transacciones recientes.',
   },
 
   announcements: {
@@ -167,12 +167,12 @@ module.exports = {
     fr: 'Produit par Etherboost',
     es: 'Producido por Etherboost',
   },
-  decentrex_desc: {
-    en: 'DecentrEx &#8212; decentralized token exchange',
-    cn: 'DecentrEx &#8212; 去中心化交易',
-    // cn:'DecentrEx &#8212; 无中心交易'
-    fr: 'DecentrEx &#8212; échange de jetons décentralisé',
-    es: 'DecentrEx &#8212; échange de jetons décentralisé',
+  KapoEx_desc: {
+    en: 'KapoEx &#8212; decentralized token exchange',
+    cn: 'KapoEx &#8212; 去中心化交易',
+    // cn:'KapoEx &#8212; 无中心交易'
+    fr: 'KapoEx &#8212; échange de jetons décentralisé',
+    es: 'KapoEx &#8212; échange de jetons décentralisé',
   },
   etheropt_desc: {
     en: 'EtherOpt &#8212; decentralized options exchange',
@@ -360,10 +360,10 @@ module.exports = {
     es: '3 Agosto, 2016',
   },
   aug032016_announcement: {
-    en: 'DecentrEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
-    cn: 'DecentrEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
-    // cn:'DecentrEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
-    fr: "DecentrEx a ete modifié pour un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il reste du solde à retirer.",
+    en: 'KapoEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
+    cn: 'KapoEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
+    // cn:'KapoEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
+    fr: "KapoEx a ete modifié pour un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il reste du solde à retirer.",
   },
   aug302016: {
     en: 'August 30, 2016',
@@ -372,11 +372,11 @@ module.exports = {
     es: '30 Agosto 2016',
   },
   aug302016_announcement: {
-    en: 'DecentrEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
-    cn: 'DecentrEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
-    // cn:'DecentrEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
-    fr: "DecentrEx utilise un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il vous reste du solde à retirer.",
-    es: 'DecentrEx utiliza un nuevo contrato inteligente.',
+    en: 'KapoEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
+    cn: 'KapoEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
+    // cn:'KapoEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
+    fr: "KapoEx utilise un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il vous reste du solde à retirer.",
+    es: 'KapoEx utiliza un nuevo contrato inteligente.',
   },
   new_account: {
     en: 'New account',
@@ -438,11 +438,11 @@ module.exports = {
     fr: 'Portefeuille',
     es: 'Cartera',
   },
-  balance_decentrex: {
-    en: 'DecentrEx',
-    cn: 'DecentrEx',
-    fr: 'DecentrEx',
-    es: 'DecentrEx',
+  balance_KapoEx: {
+    en: 'KapoEx',
+    cn: 'KapoEx',
+    fr: 'KapoEx',
+    es: 'KapoEx',
   },
   amount: {
     en: 'Amount',
@@ -626,9 +626,9 @@ module.exports = {
     es: 'Arriba a la izquierda, hay dos menús desplegables para usar para seleccionar el par de divisas para intercambiar.',
   },
   deposit_withdraw_2: {
-    en: 'Under "Balances," you will see your balance for each of the two currencies you selected. This is the balance you have deposited to DecentrEx from your Ethereum account.',
+    en: 'Under "Balances," you will see your balance for each of the two currencies you selected. This is the balance you have deposited to KapoEx from your Ethereum account.',
     cn: '在“余额”下面，你可以看到两种币的各自的余额，这是从你的以太坊账号充值的余额。',
-    fr: 'Sous "Soldes" vous trouverez le solde pour chacune des deux devises selectionnées. C\'est le solde que vous venez de déposer sur decentrex depuis votre compte Ethereum',
+    fr: 'Sous "Soldes" vous trouverez le solde pour chacune des deux devises selectionnées. C\'est le solde que vous venez de déposer sur KapoEx depuis votre compte Ethereum',
     es: 'En "Saldos" se encuentra el equilibrio para cada una de las dos monedas sélectionnées.',
   },
   deposit_withdraw_3: {
@@ -638,10 +638,10 @@ module.exports = {
     es: 'Para depositar, retirar o transferencia, por favor Desplazamiento en la parte inferior de la página. Busque la sección "Ventas.',
   },
   deposit_withdraw_4: {
-    en: 'To deposit, click the "Deposit" tab, pick a token, enter an amount you would like to deposit from your Ethereum account into DecentrEx, and click "Deposit."',
-    cn: '充值点“充值”，选择一种币，输入从以太坊账号进入DecentrEx的充值数量，再点“充值”。',
-    fr: 'Pour déposer, cliquer sur "Deposit" tab, choisir un jeton, entrer le montant à déposer depuis votre compte Ethereum vers Decentrex, puis cliquer "Deposit".',
-    es: 'Para abonar, haga clic en la pestaña "depósito", elegir un modo, ingrese la cantidad a depositar desde su cuenta a Etereum Decentrex y haga clic en "depósito.',
+    en: 'To deposit, click the "Deposit" tab, pick a token, enter an amount you would like to deposit from your Ethereum account into KapoEx, and click "Deposit."',
+    cn: '充值点“充值”，选择一种币，输入从以太坊账号进入KapoEx的充值数量，再点“充值”。',
+    fr: 'Pour déposer, cliquer sur "Deposit" tab, choisir un jeton, entrer le montant à déposer depuis votre compte Ethereum vers KapoEx, puis cliquer "Deposit".',
+    es: 'Para abonar, haga clic en la pestaña "depósito", elegir un modo, ingrese la cantidad a depositar desde su cuenta a Etereum KapoEx y haga clic en "depósito.',
   },
   deposit_withdraw_5: {
     en: 'To withdraw, use the "Withdraw" tab.',
@@ -674,10 +674,10 @@ module.exports = {
     es: 'Es posible que el comercio un símbolo que no aparece en la lista, seleccione "Otros" y rellena los campos del formulario. Differentes simbolicos tienen differentes multiplicadores, es pues indispensable cumplir el formulario con cuidado.',
   },
   trade_3: {
-    en: 'DecentrEx supports resting orders (adding liquidity) and trading against existing resting orders (taking liquidity).',
-    cn: 'DecentrEx支持“待定下单”（resting order）来增加流动性，以及交易“待定下单”来减少流动性。',
-    fr: "DecentrEx supportes les ordres restant (l'ajout de liquidite) et marchander contre des ordres restant (prise de liquidite).",
-    es: 'DecentrEx apoya descansando órdenes tales como la adición de liquidez y el comercio contre órdenes existentes como descansando Tomando liquidez..',
+    en: 'KapoEx supports resting orders (adding liquidity) and trading against existing resting orders (taking liquidity).',
+    cn: 'KapoEx支持“待定下单”（resting order）来增加流动性，以及交易“待定下单”来减少流动性。',
+    fr: "KapoEx supportes les ordres restant (l'ajout de liquidite) et marchander contre des ordres restant (prise de liquidite).",
+    es: 'KapoEx apoya descansando órdenes tales como la adición de liquidez y el comercio contre órdenes existentes como descansando Tomando liquidez..',
   },
   trade_4: {
     en: 'To create a resting order, fill out the "Buy" or "Sell" form at the top of the page. The order expires in the number of blocks you specify (1 block &#8776; 15 seconds).',
@@ -692,10 +692,10 @@ module.exports = {
     es: 'Si desea cancelar su pedido, simplemente haga clic en su pedido aparecerá en el libro de órdenes y pulse el botón "Cancelar". Esto enviará una transacción Ethereum, una vez confirmada, canceló la orden. Cabe señalar que induce un coste de gas (Tarifas de transacción Ethereum), mientras que la colocación de un pedido restante hasta su expiración no cuesta de gas.',
   },
   trade_6: {
-    en: 'When you submit a resting order, it gets broadcast to the world. The current broadcast channel is a Gitter chat room, but DecentrEx also supports using Ethereum events as a fallback broadcast mechanism.',
-    cn: '但你提交了一个“待定下单”后，它会广播到全球。现在的传播渠道是Gitter聊天室，但是DecentrEx也支持以太坊事件机制，用来保底。',
-    fr: "Quand vous soumettez un ordre restant, il se diffuse dans le monde entier. Le canal de causerie principal s'appele Gitter chat room, mais Decentrex supporte egalement des evenements ethereum en tant que moyen de diffusion alternative.",
-    es: 'Cuando se envía una orden de reposo, que se transmitió al mundo. El canal de difusión actual es una sala de chat Gitter, Decentrex también promueve eventos Ethereum como un medio alternativo de distribución.',
+    en: 'When you submit a resting order, it gets broadcast to the world. The current broadcast channel is a Gitter chat room, but KapoEx also supports using Ethereum events as a fallback broadcast mechanism.',
+    cn: '但你提交了一个“待定下单”后，它会广播到全球。现在的传播渠道是Gitter聊天室，但是KapoEx也支持以太坊事件机制，用来保底。',
+    fr: "Quand vous soumettez un ordre restant, il se diffuse dans le monde entier. Le canal de causerie principal s'appele Gitter chat room, mais KapoEx supporte egalement des evenements ethereum en tant que moyen de diffusion alternative.",
+    es: 'Cuando se envía una orden de reposo, que se transmitió al mundo. El canal de difusión actual es una sala de chat Gitter, KapoEx también promueve eventos Ethereum como un medio alternativo de distribución.',
   },
   trade_7: {
     en: 'The GUI scans for new orders being broadcast and displays them in the order book (offers on the left, bids on the right).',
@@ -704,10 +704,10 @@ module.exports = {
     es: 'La interfaz gráfica de usuario detecta nuevos pedidos recibidos y que se muestran en el libro de orden (izquierda venta, compra derecha).',
   },
   trade_8: {
-    en: 'A resting order represents a cryptographically signed intent to trade. Up until your order expires or is cancelled, anyone who has seen it can trade against it, assuming both traders have enough funds in their DecentrEx accounts. The GUI filters out orders that do not have funds to back them up. Partial fills are supported.',
+    en: 'A resting order represents a cryptographically signed intent to trade. Up until your order expires or is cancelled, anyone who has seen it can trade against it, assuming both traders have enough funds in their KapoEx accounts. The GUI filters out orders that do not have funds to back them up. Partial fills are supported.',
     cn: '“待定下单”代表加密签名过的交易意向。在你的订单过期或取消以前，看见这个订单的任何人可以与它交易（前提是双方账号中有足够的币）。页面会过滤掉币的数量不够的订单。订单也可以部分成交。',
-    fr: "Un ordre restant represente une intention de commercer cryptographiquement signée. Jusqu'à ce que votre commande expire ou soit annulée, quiconque l'a vu peut échanger contre elle, en supposant que les deux commerçants disposent de suffisamment de fonds dans leurs comptes DecentrEx. Le remplissage partiel de l'ordre est egalement supporte.",
-    es: 'Una orden restante representa intención de negociar, firmado criptográficamente. Hasta que el pedido se cancela o expira, cualquiera puede intercambiar sierra en contra de ella, suponiendo que ambos operadores tienen fondos suficientes en sus cuentas DecentrEx. También se admite el llenado parcial de la orden.',
+    fr: "Un ordre restant represente une intention de commercer cryptographiquement signée. Jusqu'à ce que votre commande expire ou soit annulée, quiconque l'a vu peut échanger contre elle, en supposant que les deux commerçants disposent de suffisamment de fonds dans leurs comptes KapoEx. Le remplissage partiel de l'ordre est egalement supporte.",
+    es: 'Una orden restante representa intención de negociar, firmado criptográficamente. Hasta que el pedido se cancela o expira, cualquiera puede intercambiar sierra en contra de ella, suponiendo que ambos operadores tienen fondos suficientes en sus cuentas KapoEx. También se admite el llenado parcial de la orden.',
   },
   trade_9: {
     en: 'To trade against an existing resting order, click "Buy" or "Sell" next to it in the order book and type in the volume you want to trade. The GUI will do one last check that the trade can cross (the funds are there and the order hasn\'t already traded), but if someone submits a transaction right before you do, your Ethereum transaction will fail because the order already traded.',

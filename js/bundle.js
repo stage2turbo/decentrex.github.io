@@ -1188,11 +1188,11 @@ module.exports = (config) => {
 /* eslint-env browser */
 
 module.exports = {
-  homeURL: 'https://decentrex.com',
-  contractDecentrEx: 'smart_contract/decentrex.sol',
+  homeURL: 'https://KapoEx.com',
+  contractKapoEx: 'smart_contract/KapoEx.sol',
   contractToken: 'smart_contract/token.sol',
   contractReserveToken: 'smart_contract/reservetoken.sol',
-  contractDecentrExAddrs: [
+  contractKapoExAddrs: [
     { addr: '0xbf29685856fae1e228878dfb35b280c0adcc3b05', info: 'Deployed 05/26/2017' },
   ],
   ethTestnet: false,
@@ -1206,11 +1206,11 @@ module.exports = {
   gasTrade: 250000,
   gasOrder: 250000,
   ordersOnchain: false,
-  apiServer: 'https://api.decentrex.com',
-  userCookie: 'DecentrEx',
-  eventsCacheCookie: 'DecentrEx_eventsCache',
-  deadOrdersCacheCookie: 'DecentrEx_deadOrdersCache',
-  ordersCacheCookie: 'DecentrEx_ordersCache',
+  apiServer: 'https://api.KapoEx.com',
+  userCookie: 'KapoEx',
+  eventsCacheCookie: 'KapoEx_eventsCache',
+  deadOrdersCacheCookie: 'KapoEx_deadOrdersCache',
+  ordersCacheCookie: 'KapoEx_ordersCache',
   etherscanAPIKey: 'KF9ADFTHP4WJF1GV3WHJZCTFZIN5XZUXG1',
      tokens: [
    { addr: '0x0000000000000000000000000000000000000000', name: 'ETH', decimals: 18 },
@@ -2184,10 +2184,10 @@ module.exports = {
 
 module.exports = {
   homeURL: 'http://localhost:8080',
-  contractDecentrEx: 'smart_contract/decentrex.sol',
+  contractKapoEx: 'smart_contract/KapoEx.sol',
   contractToken: 'smart_contract/token.sol',
   contractReserveToken: 'smart_contract/reservetoken.sol',
-  contractDecentrExAddrs: [
+  contractKapoExAddrs: [
     { addr: '0x0000000000000000000000000000000000000000', info: 'Zero contract' },
   ],
   ethTestnet: 'ropsten',
@@ -2202,10 +2202,10 @@ module.exports = {
   gasOrder: 250000,
   ordersOnchain: false,
   apiServer: 'http://localhost:3000',
-  userCookie: 'DecentrEx',
-  eventsCacheCookie: 'DecentrEx_eventsCache',
-  deadOrdersCacheCookie: 'DecentrEx_deadOrdersCache',
-  ordersCacheCookie: 'DecentrEx_ordersCache',
+  userCookie: 'KapoEx',
+  eventsCacheCookie: 'KapoEx_eventsCache',
+  deadOrdersCacheCookie: 'KapoEx_deadOrdersCache',
+  ordersCacheCookie: 'KapoEx_ordersCache',
   etherscanAPIKey: 'GCGR1C9I17TYIRNYUDDEIJH1K5BRPH4UDE',
  tokens: [
     { addr: '0x0000000000000000000000000000000000000000', name: 'ETH', decimals: 18 },
@@ -2249,7 +2249,7 @@ require('datejs');
 const async = typeof window === 'undefined' ? require('async') : require('async/dist/async.min.js');
 const translations = require('./translations.js');
 
-function DecentrEx() {
+function KapoEx() {
   this.q = async.queue((task, callback) => {
     task(callback);
   }, 1);
@@ -2263,7 +2263,7 @@ function DecentrEx() {
   this.nonce = undefined;
   this.price = undefined;
   this.priceUpdated = Date.now();
-  this.contractDecentrEx = undefined;
+  this.contractKapoEx = undefined;
   this.contractToken = undefined;
   this.eventsCache = {};
   this.publishingOrders = false;
@@ -2283,10 +2283,10 @@ function DecentrEx() {
   this.web3 = undefined;
   this.daysOfData = 7;
   window.addEventListener('load', () => {
-    this.startDecentrEx();
+    this.startKapoEx();
   });
 }
-DecentrEx.prototype.ejs = function ejs(url, element, data) {
+KapoEx.prototype.ejs = function ejs(url, element, data) {
   if ($(`#${element}`).length) {
     new EJS({ url }).update(element, data);
     this.translator.lang(this.language);
@@ -2294,7 +2294,7 @@ DecentrEx.prototype.ejs = function ejs(url, element, data) {
     console.log(`Failed to render template because ${element} does not exist.`);
   }
 };
-DecentrEx.prototype.alertInfo = function alertInfo(message) {
+KapoEx.prototype.alertInfo = function alertInfo(message) {
   console.log(message);
   alertify.message(message);
   ga('send', {
@@ -2303,7 +2303,7 @@ DecentrEx.prototype.alertInfo = function alertInfo(message) {
     eventAction: 'Info',
   });
 };
-DecentrEx.prototype.alertDialog = function alertDialog(message) {
+KapoEx.prototype.alertDialog = function alertDialog(message) {
   console.log(message);
   alertify.alert('Alert', message, () => {});
   ga('send', {
@@ -2312,7 +2312,7 @@ DecentrEx.prototype.alertDialog = function alertDialog(message) {
     eventAction: 'Dialog',
   });
 };
-DecentrEx.prototype.alertWarning = function alertWarning(message) {
+KapoEx.prototype.alertWarning = function alertWarning(message) {
   console.log(message);
   alertify.warning(message);
   ga('send', {
@@ -2321,7 +2321,7 @@ DecentrEx.prototype.alertWarning = function alertWarning(message) {
     eventAction: 'Warning',
   });
 };
-DecentrEx.prototype.alertError = function alertError(message) {
+KapoEx.prototype.alertError = function alertError(message) {
   console.log(message);
   alertify.alert('Error', message, () => {});
   ga('send', {
@@ -2330,7 +2330,7 @@ DecentrEx.prototype.alertError = function alertError(message) {
     eventAction: 'Error',
   });
 };
-DecentrEx.prototype.alertSuccess = function alertSuccess(message) {
+KapoEx.prototype.alertSuccess = function alertSuccess(message) {
   console.log(message);
   alertify.success(message);
   ga('send', {
@@ -2339,14 +2339,14 @@ DecentrEx.prototype.alertSuccess = function alertSuccess(message) {
     eventAction: 'Success',
   });
 };
-DecentrEx.prototype.txError = function txError(err) {
+KapoEx.prototype.txError = function txError(err) {
   console.log('Error', err);
   utility.getBalance(this.web3, this.addrs[this.selectedAccount], (errBalance, resultBalance) => {
     const balance = utility.weiToEth(resultBalance);
     if (this.connection.connection === 'RPC') {
       if (balance < 0.005) {
         this.alertError(
-          `You tried to send an Ethereum transaction but there was an error. Your wallet's ETH balance (${balance} ETH) is not enough to cover the gas cost (Ethereum network fee). DecentrEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on DecentrEx. The gas has to come directly from your Wallet (DecentrEx has no physical way of paying gas from your deposited ETH).`);
+          `You tried to send an Ethereum transaction but there was an error. Your wallet's ETH balance (${balance} ETH) is not enough to cover the gas cost (Ethereum network fee). KapoEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on KapoEx. The gas has to come directly from your Wallet (KapoEx has no physical way of paying gas from your deposited ETH).`);
         ga('send', {
           hitType: 'event',
           eventCategory: 'Error',
@@ -2379,7 +2379,7 @@ DecentrEx.prototype.txError = function txError(err) {
         });
       } else if (balance < 0.005) {
         this.alertError(
-          `You tried to send an Ethereum transaction but there was an error. Your wallet's ETH balance (${balance} ETH) is not enough to cover the gas cost (Ethereum network fee). DecentrEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on DecentrEx. The gas has to come directly from your Wallet (DecentrEx has no physical way of paying gas from your deposited ETH).`);
+          `You tried to send an Ethereum transaction but there was an error. Your wallet's ETH balance (${balance} ETH) is not enough to cover the gas cost (Ethereum network fee). KapoEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on KapoEx. The gas has to come directly from your Wallet (KapoEx has no physical way of paying gas from your deposited ETH).`);
         ga('send', {
           hitType: 'event',
           eventCategory: 'Error',
@@ -2387,7 +2387,7 @@ DecentrEx.prototype.txError = function txError(err) {
         });
       } else {
         this.alertError(
-          "You tried to send an Ethereum transaction but there was an error. Make sure you have enough ETH in your wallet to cover the gas cost (Ethereum network fee). DecentrEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on DecentrEx. The gas has to come directly from your Wallet (DecentrEx has no physical way of paying gas from your deposited ETH).");
+          "You tried to send an Ethereum transaction but there was an error. Make sure you have enough ETH in your wallet to cover the gas cost (Ethereum network fee). KapoEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on KapoEx. The gas has to come directly from your Wallet (KapoEx has no physical way of paying gas from your deposited ETH).");
         ga('send', {
           hitType: 'event',
           eventCategory: 'Error',
@@ -2396,7 +2396,7 @@ DecentrEx.prototype.txError = function txError(err) {
       }
     } else {
       this.alertError(
-        "You tried to send an Ethereum transaction but there was an error. Make sure you have enough ETH in your wallet to cover the gas cost (Ethereum network fee). DecentrEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on DecentrEx. The gas has to come directly from your Wallet (DecentrEx has no physical way of paying gas from your deposited ETH).");
+        "You tried to send an Ethereum transaction but there was an error. Make sure you have enough ETH in your wallet to cover the gas cost (Ethereum network fee). KapoEx sends 0.005 ETH with each transaction. This is an overestimate and the excess will get refunded to you. It's a good idea to send more than 0.005 so you can pay for not only this transaction, but also future transactions you do on KapoEx. The gas has to come directly from your Wallet (KapoEx has no physical way of paying gas from your deposited ETH).");
       ga('send', {
         hitType: 'event',
         eventCategory: 'Error',
@@ -2405,7 +2405,7 @@ DecentrEx.prototype.txError = function txError(err) {
     }
   });
 };
-DecentrEx.prototype.alertTxResult = function alertTxResult(err, txsIn) {
+KapoEx.prototype.alertTxResult = function alertTxResult(err, txsIn) {
   const txs = Array.isArray(txsIn) ? txsIn : [txsIn];
   if (err) {
     this.txError(err);
@@ -2439,11 +2439,11 @@ DecentrEx.prototype.alertTxResult = function alertTxResult(err, txsIn) {
     });
   }
 };
-DecentrEx.prototype.enableTooltipsAndPopovers = function enableTooltipsAndPopovers() {
+KapoEx.prototype.enableTooltipsAndPopovers = function enableTooltipsAndPopovers() {
   $('[data-toggle="popover"]').popover({ trigger: 'hover' });
   $('[data-toggle="tooltip"]').tooltip();
 };
-DecentrEx.prototype.logout = function logout() {
+KapoEx.prototype.logout = function logout() {
   this.addrs = [this.config.ethAddr];
   this.pks = [this.config.ethAddrPrivateKey];
   this.selectedAccount = 0;
@@ -2455,7 +2455,7 @@ DecentrEx.prototype.logout = function logout() {
     eventAction: 'Logout',
   });
 };
-DecentrEx.prototype.createAccount = function createAccount() {
+KapoEx.prototype.createAccount = function createAccount() {
   const newAccount = utility.createAccount();
   const addr = newAccount.address;
   const pk = newAccount.privateKey;
@@ -2468,7 +2468,7 @@ DecentrEx.prototype.createAccount = function createAccount() {
     eventAction: 'Create Account',
   });
 };
-DecentrEx.prototype.deleteAccount = function deleteAccount() {
+KapoEx.prototype.deleteAccount = function deleteAccount() {
   this.addrs.splice(this.selectedAccount, 1);
   this.pks.splice(this.selectedAccount, 1);
   this.selectedAccount = 0;
@@ -2480,7 +2480,7 @@ DecentrEx.prototype.deleteAccount = function deleteAccount() {
     eventAction: 'Delete Account',
   });
 };
-DecentrEx.prototype.selectAccount = function selectAccount(i) {
+KapoEx.prototype.selectAccount = function selectAccount(i) {
   this.selectedAccount = i;
   this.nonce = undefined;
   this.refresh(() => {}, true, true);
@@ -2490,7 +2490,7 @@ DecentrEx.prototype.selectAccount = function selectAccount(i) {
     eventAction: 'Select Account',
   });
 };
-DecentrEx.prototype.addAccount = function addAccount(newAddr, newPk) {
+KapoEx.prototype.addAccount = function addAccount(newAddr, newPk) {
   let addr = newAddr.toLowerCase();
   let pk = newPk;
   if (addr.slice(0, 2) !== '0x') addr = `0x${addr}`;
@@ -2529,7 +2529,7 @@ DecentrEx.prototype.addAccount = function addAccount(newAddr, newPk) {
     });
   }
 };
-DecentrEx.prototype.showPrivateKey = function showPrivateKey() {
+KapoEx.prototype.showPrivateKey = function showPrivateKey() {
   const addr = this.addrs[this.selectedAccount];
   const pk = this.pks[this.selectedAccount];
   if (!pk) {
@@ -2549,16 +2549,16 @@ DecentrEx.prototype.showPrivateKey = function showPrivateKey() {
     });
   }
 };
-DecentrEx.prototype.addressLink = function addressLink(address) {
+KapoEx.prototype.addressLink = function addressLink(address) {
   return `https://${this.config.ethTestnet ? `${this.config.ethTestnet}.` : ''}etherscan.io/address/${address}`;
 };
-DecentrEx.prototype.contractAddr = function contractAddr(addr) {
-  this.config.contractDecentrExAddr = addr;
+KapoEx.prototype.contractAddr = function contractAddr(addr) {
+  this.config.contractKapoExAddr = addr;
   this.displayConnectionDescription(() => {});
   this.loading(() => {});
   this.refresh(() => {}, true, true);
 };
-DecentrEx.prototype.displayAccounts = function displayAccounts(callback) {
+KapoEx.prototype.displayAccounts = function displayAccounts(callback) {
   if (this.addrs.length <= 0 || this.addrs.length !== this.pks.length) {
     this.addrs = [this.config.ethAddr];
     this.pks = [this.config.ethAddrPrivateKey];
@@ -2581,7 +2581,7 @@ DecentrEx.prototype.displayAccounts = function displayAccounts(callback) {
       callback();
     });
 };
-DecentrEx.prototype.displayLanguages = function displayLanguages(callback) {
+KapoEx.prototype.displayLanguages = function displayLanguages(callback) {
   const languages = Object.keys(translations.trades);
   this.ejs(`${this.config.homeURL}/templates/languages.ejs`, 'languages', {
     languages,
@@ -2589,7 +2589,7 @@ DecentrEx.prototype.displayLanguages = function displayLanguages(callback) {
   });
   callback();
 };
-DecentrEx.prototype.selectLanguage = function selectLanguage(newLanguage) {
+KapoEx.prototype.selectLanguage = function selectLanguage(newLanguage) {
   this.language = newLanguage;
   window.title = translations.title[this.language];
   this.translator.lang(this.language);
@@ -2602,11 +2602,11 @@ DecentrEx.prototype.selectLanguage = function selectLanguage(newLanguage) {
     eventLabel: newLanguage,
   });
 };
-DecentrEx.prototype.loadEvents = function loadEvents(callback) {
+KapoEx.prototype.loadEvents = function loadEvents(callback) {
   let lastBlock = 0;
   Object.keys(this.eventsCache).forEach((id) => {
     const event = this.eventsCache[id];
-    if (event.blockNumber > lastBlock && event.address === this.config.contractDecentrExAddr) {
+    if (event.blockNumber > lastBlock && event.address === this.config.contractKapoExAddr) {
       lastBlock = event.blockNumber;
     }
   });
@@ -2654,7 +2654,7 @@ DecentrEx.prototype.loadEvents = function loadEvents(callback) {
     }
   });
 };
-DecentrEx.prototype.displayMyTransactions =
+KapoEx.prototype.displayMyTransactions =
 function displayMyTransactions(ordersIn, blockNumber, callback) {
   // only look at orders for the selected token and base
   let orders = ordersIn.filter(
@@ -2669,7 +2669,7 @@ function displayMyTransactions(ordersIn, blockNumber, callback) {
   orders = orders.filter(
     order => this.addrs[this.selectedAccount].toLowerCase() === order.order.user.toLowerCase());
   // filter only orders that match the smart contract address
-  orders = orders.filter(order => order.order.contractAddr === this.config.contractDecentrExAddr);
+  orders = orders.filter(order => order.order.contractAddr === this.config.contractKapoExAddr);
   // final order filtering and sorting
   const buyOrders = orders.filter(x => x.amount > 0);
   const sellOrders = orders.filter(x => x.amount < 0);
@@ -2682,7 +2682,7 @@ function displayMyTransactions(ordersIn, blockNumber, callback) {
     try {
       if (
         event.event === 'Trade' &&
-        event.address === this.config.contractDecentrExAddr &&
+        event.address === this.config.contractKapoExAddr &&
         (event.args.get.toLowerCase() === this.addrs[this.selectedAccount].toLowerCase() ||
           event.args.give.toLowerCase() === this.addrs[this.selectedAccount].toLowerCase())
       ) {
@@ -2730,7 +2730,7 @@ function displayMyTransactions(ordersIn, blockNumber, callback) {
         }
       } else if (
         event.event === 'Deposit' &&
-        event.address === this.config.contractDecentrExAddr &&
+        event.address === this.config.contractKapoExAddr &&
         (
           event.args.token === this.selectedBase.addr ||
           event.args.token === this.selectedToken.addr
@@ -2752,7 +2752,7 @@ function displayMyTransactions(ordersIn, blockNumber, callback) {
         });
       } else if (
         event.event === 'Withdraw' &&
-        event.address === this.config.contractDecentrExAddr &&
+        event.address === this.config.contractKapoExAddr &&
         (
           event.args.token === this.selectedBase.addr ||
           event.args.token === this.selectedToken.addr
@@ -2814,7 +2814,7 @@ function displayMyTransactions(ordersIn, blockNumber, callback) {
       callback();
     });
 };
-DecentrEx.prototype.displayVolumes = function displayVolumes(
+KapoEx.prototype.displayVolumes = function displayVolumes(
   orders, returnTicker, blockNumber, callback) {
   let tokenVolumes = {};
   let pairVolumes = {};
@@ -2892,7 +2892,7 @@ DecentrEx.prototype.displayVolumes = function displayVolumes(
       Number(order.ethAvailableVolumeBase).toFixed(3) >= this.minOrderSize);
     // filter only orders that match the smart contract address
     ordersFiltered = ordersFiltered.filter(
-      order => order.order.contractAddr === this.config.contractDecentrExAddr);
+      order => order.order.contractAddr === this.config.contractKapoExAddr);
     // final order filtering and sorting
     const buyOrders = ordersFiltered.filter(x => x.amount > 0);
     const sellOrders = ordersFiltered.filter(x => x.amount < 0);
@@ -2913,12 +2913,12 @@ DecentrEx.prototype.displayVolumes = function displayVolumes(
   });
   callback();
 };
-DecentrEx.prototype.displayTradesAndChart = function displayTradesAndChart(callback) {
+KapoEx.prototype.displayTradesAndChart = function displayTradesAndChart(callback) {
   // get the trade list
   const events = Object.values(this.eventsCache);
   const trades = [];
   events.forEach((event) => {
-    if (event.event === 'Trade' && event.address === this.config.contractDecentrExAddr) {
+    if (event.event === 'Trade' && event.address === this.config.contractKapoExAddr) {
       if (event.args.amountGive.toNumber() > 0 && event.args.amountGet.toNumber() > 0) {
         // don't show trades involving 0 amounts
         let trade;
@@ -3036,7 +3036,7 @@ DecentrEx.prototype.displayTradesAndChart = function displayTradesAndChart(callb
 
   callback();
 };
-DecentrEx.prototype.candlestickChart =
+KapoEx.prototype.candlestickChart =
 function candlestickChart(elem, title, xtitle, ytitle, data, minValue, maxValue) {
   $(`#${elem}`).html('');
   google.charts.setOnLoadCallback(() => {
@@ -3081,7 +3081,7 @@ function candlestickChart(elem, title, xtitle, ytitle, data, minValue, maxValue)
     }
   });
 };
-DecentrEx.prototype.depthChart =
+KapoEx.prototype.depthChart =
 function depthChart(elem, title, xtitle, ytitle, data, minX, maxX) {
   $(`#${elem}`).html('');
   google.charts.setOnLoadCallback(() => {
@@ -3124,7 +3124,7 @@ function depthChart(elem, title, xtitle, ytitle, data, minX, maxX) {
     }
   });
 };
-DecentrEx.prototype.lineChart =
+KapoEx.prototype.lineChart =
 function lineChart(elem, title, xtype, ytype, xtitle, ytitle, data) {
   $(`#${elem}`).html('');
   google.charts.setOnLoadCallback(() => {
@@ -3152,7 +3152,7 @@ function lineChart(elem, title, xtype, ytype, xtitle, ytitle, data) {
     }
   });
 };
-DecentrEx.prototype.getOrdersByPair = function getOrdersByPair(tokenA, tokenB, callback) {
+KapoEx.prototype.getOrdersByPair = function getOrdersByPair(tokenA, tokenB, callback) {
   utility.getURL(`${this.config.apiServer}/orders/${this.apiServerNonce}/${tokenA}/${tokenB}`, (err, result) => {
     if (!err && result !== 'error') {
       try {
@@ -3195,7 +3195,7 @@ DecentrEx.prototype.getOrdersByPair = function getOrdersByPair(tokenA, tokenB, c
     }
   });
 };
-DecentrEx.prototype.getReturnTicker = function getTopOrders(callback) {
+KapoEx.prototype.getReturnTicker = function getTopOrders(callback) {
   utility.getURL(`${this.config.apiServer}/returnTicker`, (err, result) => {
     if (!err && result !== 'error') {
       try {
@@ -3209,7 +3209,7 @@ DecentrEx.prototype.getReturnTicker = function getTopOrders(callback) {
     }
   });
 };
-DecentrEx.prototype.getTopOrders = function getTopOrders(callback) {
+KapoEx.prototype.getTopOrders = function getTopOrders(callback) {
   utility.getURL(`${this.config.apiServer}/topOrders/${this.apiServerNonce}`, (err, result) => {
     if (!err) {
       try {
@@ -3250,7 +3250,7 @@ DecentrEx.prototype.getTopOrders = function getTopOrders(callback) {
     }
   });
 };
-DecentrEx.prototype.displayOrderbook = function displayOrderbook(ordersIn, blockNumber, callback) {
+KapoEx.prototype.displayOrderbook = function displayOrderbook(ordersIn, blockNumber, callback) {
   // only look at orders for the selected token and base
   let orders = ordersIn.filter(
     x =>
@@ -3265,7 +3265,7 @@ DecentrEx.prototype.displayOrderbook = function displayOrderbook(ordersIn, block
     Number(order.ethAvailableVolume).toFixed(3) >= this.minOrderSize &&
     Number(order.ethAvailableVolumeBase).toFixed(3) >= this.minOrderSize);
   // filter only orders that match the smart contract address
-  orders = orders.filter(order => order.order.contractAddr === this.config.contractDecentrExAddr);
+  orders = orders.filter(order => order.order.contractAddr === this.config.contractKapoExAddr);
   // final order filtering and sorting
   const buyOrders = orders.filter(x => x.amount > 0);
   const sellOrders = orders.filter(x => x.amount < 0);
@@ -3325,7 +3325,7 @@ DecentrEx.prototype.displayOrderbook = function displayOrderbook(ordersIn, block
   this.depthChart('chartDepth', '', '', '', depthDataFiltered, median * 0.25, median * 1.75);
   callback();
 };
-DecentrEx.prototype.displayTokensAndBases = function displayTokensAndBases(callback) {
+KapoEx.prototype.displayTokensAndBases = function displayTokensAndBases(callback) {
   const tokens = this.config.tokens.map(x => x);
   tokens.sort((a, b) => (a.name > b.name ? 1 : -1));
   this.ejs(`${this.config.homeURL}/templates/tokensDropdown.ejs`, 'tokensDropdown', {
@@ -3338,7 +3338,7 @@ DecentrEx.prototype.displayTokensAndBases = function displayTokensAndBases(callb
   });
   callback();
 };
-DecentrEx.prototype.displayAllBalances = function displayAllBalances(callback) {
+KapoEx.prototype.displayAllBalances = function displayAllBalances(callback) {
   const zeroAddr = '0x0000000000000000000000000000000000000000';
   // add selected token and base to config.tokens
   const tempTokens = [this.selectedToken, this.selectedBase];
@@ -3348,8 +3348,8 @@ DecentrEx.prototype.displayAllBalances = function displayAllBalances(callback) {
       if (token.addr === zeroAddr) {
         utility.call(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'balanceOf',
           [token.addr, this.addrs[this.selectedAccount]],
           (err, result) => {
@@ -3368,8 +3368,8 @@ DecentrEx.prototype.displayAllBalances = function displayAllBalances(callback) {
       } else {
         utility.call(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'balanceOf',
           [token.addr, this.addrs[this.selectedAccount]],
           (err, result) => {
@@ -3414,7 +3414,7 @@ DecentrEx.prototype.displayAllBalances = function displayAllBalances(callback) {
       callback();
     });
 };
-DecentrEx.prototype.transfer = function transfer(addr, inputAmount, toAddr) {
+KapoEx.prototype.transfer = function transfer(addr, inputAmount, toAddr) {
   let amount = new BigNumber(Number(utility.ethToWei(inputAmount, this.getDivisor(addr))));
   const token = this.getToken(addr);
   if (amount.lte(0)) {
@@ -3519,7 +3519,7 @@ DecentrEx.prototype.transfer = function transfer(addr, inputAmount, toAddr) {
       });
   }
 };
-DecentrEx.prototype.deposit = function deposit(addr, inputAmount) {
+KapoEx.prototype.deposit = function deposit(addr, inputAmount) {
   let amount = new BigNumber(Number(utility.ethToWei(inputAmount, this.getDivisor(addr))));
   const token = this.getToken(addr);
   if (amount.lte(0)) {
@@ -3539,8 +3539,8 @@ DecentrEx.prototype.deposit = function deposit(addr, inputAmount) {
       if (amount.lte(result)) {
         utility.send(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'deposit',
           [{ gas: this.config.gasDeposit, value: amount.toNumber() }],
           this.addrs[this.selectedAccount],
@@ -3584,7 +3584,7 @@ DecentrEx.prototype.deposit = function deposit(addr, inputAmount) {
             this.contractToken,
             addr,
             'approve',
-            [this.config.contractDecentrExAddr, amount, { gas: this.config.gasApprove, value: 0 }],
+            [this.config.contractKapoExAddr, amount, { gas: this.config.gasApprove, value: 0 }],
             this.addrs[this.selectedAccount],
             this.pks[this.selectedAccount],
             this.nonce,
@@ -3594,8 +3594,8 @@ DecentrEx.prototype.deposit = function deposit(addr, inputAmount) {
               txs.push(resultSend);
               utility.send(
                 this.web3,
-                this.contractDecentrEx,
-                this.config.contractDecentrExAddr,
+                this.contractKapoEx,
+                this.config.contractKapoExAddr,
                 'depositToken',
                 [addr, amount, { gas: this.config.gasDeposit, value: 0 }],
                 this.addrs[this.selectedAccount],
@@ -3628,7 +3628,7 @@ DecentrEx.prototype.deposit = function deposit(addr, inputAmount) {
       });
   }
 };
-DecentrEx.prototype.withdraw = function withdraw(addr, amountIn) {
+KapoEx.prototype.withdraw = function withdraw(addr, amountIn) {
   let amount = new BigNumber(Number(utility.ethToWei(amountIn, this.getDivisor(addr))));
   const token = this.getToken(addr);
   if (amount.lte(0)) {
@@ -3644,8 +3644,8 @@ DecentrEx.prototype.withdraw = function withdraw(addr, amountIn) {
   }
   utility.call(
     this.web3,
-    this.contractDecentrEx,
-    this.config.contractDecentrExAddr,
+    this.contractKapoEx,
+    this.config.contractKapoExAddr,
     'balanceOf',
     [addr, this.addrs[this.selectedAccount]],
     (err, result) => {
@@ -3667,8 +3667,8 @@ DecentrEx.prototype.withdraw = function withdraw(addr, amountIn) {
       } else if (addr.slice(0, 39) === '0x0000000000000000000000000000000000000') {
         utility.send(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'withdraw',
           [amount, { gas: this.config.gasWithdraw, value: 0 }],
           this.addrs[this.selectedAccount],
@@ -3689,8 +3689,8 @@ DecentrEx.prototype.withdraw = function withdraw(addr, amountIn) {
       } else {
         utility.send(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'withdrawToken',
           [addr, amount, { gas: this.config.gasWithdraw, value: 0 }],
           this.addrs[this.selectedAccount],
@@ -3711,7 +3711,7 @@ DecentrEx.prototype.withdraw = function withdraw(addr, amountIn) {
       }
     });
 };
-DecentrEx.prototype.order = function order(direction, amount, price, expires, refresh) {
+KapoEx.prototype.order = function order(direction, amount, price, expires, refresh) {
   utility.blockNumber(this.web3, (err, blockNumber) => {
     const orderObj = {
       baseAddr: this.selectedBase.addr,
@@ -3740,7 +3740,7 @@ DecentrEx.prototype.order = function order(direction, amount, price, expires, re
     }
   });
 };
-DecentrEx.prototype.publishOrder = function publishOrder(
+KapoEx.prototype.publishOrder = function publishOrder(
   baseAddr, tokenAddr, direction, amount, price, expires, orderNonce) {
   let tokenGet;
   let tokenGive;
@@ -3783,8 +3783,8 @@ DecentrEx.prototype.publishOrder = function publishOrder(
   }
   utility.call(
     this.web3,
-    this.contractDecentrEx,
-    this.config.contractDecentrExAddr,
+    this.contractKapoEx,
+    this.config.contractKapoExAddr,
     'balanceOf',
     [tokenGive, this.addrs[this.selectedAccount]],
     (err, result) => {
@@ -3802,7 +3802,7 @@ DecentrEx.prototype.publishOrder = function publishOrder(
         // offchain order
         const condensed = utility.pack(
           [
-            this.config.contractDecentrExAddr,
+            this.config.contractKapoExAddr,
             tokenGet,
             amountGet,
             tokenGive,
@@ -3827,7 +3827,7 @@ DecentrEx.prototype.publishOrder = function publishOrder(
           } else {
             // Send order to offchain book:
             const order = {
-              contractAddr: this.config.contractDecentrExAddr,
+              contractAddr: this.config.contractKapoExAddr,
               tokenGet,
               amountGet,
               tokenGive,
@@ -3871,8 +3871,8 @@ DecentrEx.prototype.publishOrder = function publishOrder(
         // onchain order
         utility.send(
           this.web3,
-          this.contractDecentrEx,
-          this.config.contractDecentrExAddr,
+          this.contractKapoEx,
+          this.config.contractKapoExAddr,
           'order',
           [
             tokenGet,
@@ -3900,13 +3900,13 @@ DecentrEx.prototype.publishOrder = function publishOrder(
       }
     });
 };
-DecentrEx.prototype.cancelOrder = function cancelOrder(orderIn) {
+KapoEx.prototype.cancelOrder = function cancelOrder(orderIn) {
   const order = JSON.parse(decodeURIComponent(orderIn));
   if (order.user.toLowerCase() === this.addrs[this.selectedAccount].toLowerCase()) {
     utility.send(
       this.web3,
-      this.contractDecentrEx,
-      this.config.contractDecentrExAddr,
+      this.contractKapoEx,
+      this.config.contractKapoExAddr,
       'cancelOrder',
       [
         order.tokenGet,
@@ -3937,7 +3937,7 @@ DecentrEx.prototype.cancelOrder = function cancelOrder(orderIn) {
       });
   }
 };
-DecentrEx.prototype.trade = function trade(kind, order, inputAmount) {
+KapoEx.prototype.trade = function trade(kind, order, inputAmount) {
   if (this.addrs[this.selectedAccount].slice(0, 39) === '0x0000000000000000000000000000000000000') {
     this.alertError(
       "You haven't selected an account. Make sure you have an account selected from the Accounts dropdown in the upper right.");
@@ -3964,16 +3964,16 @@ DecentrEx.prototype.trade = function trade(kind, order, inputAmount) {
   }
   utility.call(
     this.web3,
-    this.contractDecentrEx,
-    this.config.contractDecentrExAddr,
+    this.contractKapoEx,
+    this.config.contractKapoExAddr,
     'balanceOf',
     [order.tokenGet, this.addrs[this.selectedAccount]],
     (err, result) => {
       const availableBalance = result;
       utility.call(
         this.web3,
-        this.contractDecentrEx,
-        this.config.contractDecentrExAddr,
+        this.contractKapoEx,
+        this.config.contractKapoExAddr,
         'availableVolume',
         [
           order.tokenGet,
@@ -4004,8 +4004,8 @@ DecentrEx.prototype.trade = function trade(kind, order, inputAmount) {
           }
           utility.call(
             this.web3,
-            this.contractDecentrEx,
-            this.config.contractDecentrExAddr,
+            this.contractKapoEx,
+            this.config.contractKapoExAddr,
             'testTrade',
             [
               order.tokenGet,
@@ -4025,8 +4025,8 @@ DecentrEx.prototype.trade = function trade(kind, order, inputAmount) {
               if (resultTestTrade && amount > 0) {
                 utility.send(
                   this.web3,
-                  this.contractDecentrEx,
-                  this.config.contractDecentrExAddr,
+                  this.contractKapoEx,
+                  this.config.contractKapoExAddr,
                   'trade',
                   [
                     order.tokenGet,
@@ -4083,7 +4083,7 @@ DecentrEx.prototype.trade = function trade(kind, order, inputAmount) {
         });
     });
 };
-DecentrEx.prototype.addPending = function addPending(err, txsIn) {
+KapoEx.prototype.addPending = function addPending(err, txsIn) {
   const txs = Array.isArray(txsIn) ? txsIn : [txsIn];
   txs.forEach((tx) => {
     if (!err && tx.txHash && tx.txHash !== '0x0000000000000000000000000000000000000000000000000000000000000000') {
@@ -4093,7 +4093,7 @@ DecentrEx.prototype.addPending = function addPending(err, txsIn) {
   });
   this.refresh(() => {}, true, true);
 };
-DecentrEx.prototype.updateUrl = function updateUrl() {
+KapoEx.prototype.updateUrl = function updateUrl() {
   let tokenName = this.selectedToken.name;
   let baseName = this.selectedBase.name;
   if (this.config.tokens.filter(x => x.name === tokenName).length === 0) {
@@ -4104,7 +4104,7 @@ DecentrEx.prototype.updateUrl = function updateUrl() {
   }
   window.location.hash = `#${tokenName}-${baseName}`;
 };
-DecentrEx.prototype.getDivisor = function getDivisor(tokenOrAddress) {
+KapoEx.prototype.getDivisor = function getDivisor(tokenOrAddress) {
   let result = 1000000000000000000;
   const token = this.getToken(tokenOrAddress);
   if (token && token.decimals !== undefined) {
@@ -4112,7 +4112,7 @@ DecentrEx.prototype.getDivisor = function getDivisor(tokenOrAddress) {
   }
   return new BigNumber(result);
 };
-DecentrEx.prototype.getToken = function getToken(addrOrToken, name, decimals) {
+KapoEx.prototype.getToken = function getToken(addrOrToken, name, decimals) {
   let result;
   const lowerAddrOrToken = typeof addrOrToken === 'string' ? addrOrToken.toLowerCase() : addrOrToken;
   const matchingTokens = this.config.tokens.filter(
@@ -4140,7 +4140,7 @@ DecentrEx.prototype.getToken = function getToken(addrOrToken, name, decimals) {
   }
   return result;
 };
-DecentrEx.prototype.loadToken = function loadToken(addr, callback) {
+KapoEx.prototype.loadToken = function loadToken(addr, callback) {
   let token = this.getToken(addr);
   if (token) {
     callback(null, token);
@@ -4164,7 +4164,7 @@ DecentrEx.prototype.loadToken = function loadToken(addr, callback) {
     }
   }
 };
-DecentrEx.prototype.selectToken = function selectToken(addrOrToken, name, decimals) {
+KapoEx.prototype.selectToken = function selectToken(addrOrToken, name, decimals) {
   const token = this.getToken(addrOrToken, name, decimals);
   if (token) {
     this.loading(() => {});
@@ -4177,7 +4177,7 @@ DecentrEx.prototype.selectToken = function selectToken(addrOrToken, name, decima
     });
   }
 };
-DecentrEx.prototype.selectBase = function selectBase(addrOrToken, name, decimals) {
+KapoEx.prototype.selectBase = function selectBase(addrOrToken, name, decimals) {
   const base = this.getToken(addrOrToken, name, decimals);
   if (base) {
     this.loading(() => {});
@@ -4190,7 +4190,7 @@ DecentrEx.prototype.selectBase = function selectBase(addrOrToken, name, decimals
     });
   }
 };
-DecentrEx.prototype.selectTokenAndBase = function selectTokenAndBase(tokenAddr, baseAddr) {
+KapoEx.prototype.selectTokenAndBase = function selectTokenAndBase(tokenAddr, baseAddr) {
   const token = this.getToken(tokenAddr);
   const base = this.getToken(baseAddr);
   if (token && base) {
@@ -4204,7 +4204,7 @@ DecentrEx.prototype.selectTokenAndBase = function selectTokenAndBase(tokenAddr, 
     });
   }
 };
-DecentrEx.prototype.displayBuySell = function displayBuySell(callback) {
+KapoEx.prototype.displayBuySell = function displayBuySell(callback) {
   this.ejs(`${this.config.homeURL}/templates/buy.ejs`, 'buy', {
     selectedToken: this.selectedToken,
     selectedBase: this.selectedBase,
@@ -4216,17 +4216,17 @@ DecentrEx.prototype.displayBuySell = function displayBuySell(callback) {
   this.enableTooltipsAndPopovers();
   callback();
 };
-DecentrEx.prototype.displayTokenGuidesDropdown = function displayTokenGuidesDropdown() {
+KapoEx.prototype.displayTokenGuidesDropdown = function displayTokenGuidesDropdown() {
   const tokens = this.config.tokens.map(x => x);
   tokens.sort((a, b) => (a.name > b.name ? 1 : -1));
   this.ejs(`${this.config.homeURL}/templates/tokenGuidesDropdown.ejs`, 'tokenGuidesDropdown', {
     tokens,
   });
 };
-DecentrEx.prototype.displayHelpDropdown = function displayHelpDropdown() {
+KapoEx.prototype.displayHelpDropdown = function displayHelpDropdown() {
   this.ejs(`${this.config.homeURL}/templates/helpDropdown.ejs`, 'helpDropdown', {});
 };
-DecentrEx.prototype.displayHelp = function displayHelp(name) {
+KapoEx.prototype.displayHelp = function displayHelp(name) {
   $('#helpBody').html('');
   this.ejs(`${this.config.homeURL}/help/${name}.ejs`, 'helpBody', {});
   $('#helpModal').modal('show');
@@ -4237,7 +4237,7 @@ DecentrEx.prototype.displayHelp = function displayHelp(name) {
     eventLabel: name,
   });
 };
-DecentrEx.prototype.displayScreencast = function displayScreencast(name) {
+KapoEx.prototype.displayScreencast = function displayScreencast(name) {
   $('#screencastBody').html('');
   this.ejs(`${this.config.homeURL}/help/${name}.ejs`, 'screencastBody', {});
   $('#screencastModal').modal('show');
@@ -4248,15 +4248,15 @@ DecentrEx.prototype.displayScreencast = function displayScreencast(name) {
     eventLabel: name,
   });
 };
-DecentrEx.prototype.displayConnectionDescription = function displayConnectionDescription() {
+KapoEx.prototype.displayConnectionDescription = function displayConnectionDescription() {
   this.ejs(`${this.config.homeURL}/templates/connectionDescription.ejs`, 'connection', {
     connection: this.connection,
-    contracts: this.config.contractDecentrExAddrs,
-    contractAddr: this.config.contractDecentrExAddr,
-    contractLink: `https://${this.config.ethTestnet ? `${this.config.ethTestnet}.` : ''}etherscan.io/address/${this.config.contractDecentrExAddr}`,
+    contracts: this.config.contractKapoExAddrs,
+    contractAddr: this.config.contractKapoExAddr,
+    contractLink: `https://${this.config.ethTestnet ? `${this.config.ethTestnet}.` : ''}etherscan.io/address/${this.config.contractKapoExAddr}`,
   });
 };
-DecentrEx.prototype.displayTokenGuide = function displayTokenGuide(name) {
+KapoEx.prototype.displayTokenGuide = function displayTokenGuide(name) {
   const matchingTokens = this.config.tokens.filter(x => name === x.name);
   if (matchingTokens.length === 1) {
     const token = matchingTokens[0];
@@ -4284,17 +4284,17 @@ DecentrEx.prototype.displayTokenGuide = function displayTokenGuide(name) {
     $('#tokenModal').modal('show');
   }
 };
-DecentrEx.prototype.checkContractUpgrade = function checkContractUpgrade() {
+KapoEx.prototype.checkContractUpgrade = function checkContractUpgrade() {
   if (
-    (!this.selectedContract || this.selectedContract !== this.config.contractDecentrExAddr) &&
+    (!this.selectedContract || this.selectedContract !== this.config.contractKapoExAddr) &&
     (this.addrs.length > 1 ||
       (this.addrs.length === 1 && this.addrs[0].slice(0, 39) !== '0x0000000000000000000000000000000000000'))
   ) {
     this.alertDialog(
-      '<p>DecentrEx has a new smart contract. It is now selected.</p><p>Please use the "Smart Contract" menu to select the old one and withdraw from it.</p><p><a href="javascript:;" class="btn btn-default" onclick="alertify.closeAll(); bundle.DecentrEx.displayHelp(\'smartContract\')">Smart contract changelog</a></p>');
+      '<p>KapoEx has a new smart contract. It is now selected.</p><p>Please use the "Smart Contract" menu to select the old one and withdraw from it.</p><p><a href="javascript:;" class="btn btn-default" onclick="alertify.closeAll(); bundle.KapoEx.displayHelp(\'smartContract\')">Smart contract changelog</a></p>');
   }
 };
-DecentrEx.prototype.resetCaches = function resetCaches() {
+KapoEx.prototype.resetCaches = function resetCaches() {
   utility.eraseCookie(this.config.eventsCacheCookie);
   location.reload();
   ga('send', {
@@ -4303,7 +4303,7 @@ DecentrEx.prototype.resetCaches = function resetCaches() {
     eventAction: 'Reset caches',
   });
 };
-DecentrEx.prototype.loading = function loading(callback) {
+KapoEx.prototype.loading = function loading(callback) {
   [
     'deposit',
     'withdraw',
@@ -4321,7 +4321,7 @@ DecentrEx.prototype.loading = function loading(callback) {
   });
   callback();
 };
-DecentrEx.prototype.refresh = function refresh(callback, forceEventRead, initMarket, token, base) {
+KapoEx.prototype.refresh = function refresh(callback, forceEventRead, initMarket, token, base) {
   this.q.push((done) => {
     if (token && base) {
       this.selectedToken = token;
@@ -4334,7 +4334,7 @@ DecentrEx.prototype.refresh = function refresh(callback, forceEventRead, initMar
       this.selectedToken = temp;
     }
     console.log('Beginning refresh', new Date(), `${this.selectedToken.name}/${this.selectedBase.name}`);
-    this.selectedContract = this.config.contractDecentrExAddr;
+    this.selectedContract = this.config.contractKapoExAddr;
     utility.createCookie(
       this.config.userCookie,
       JSON.stringify({
@@ -4477,7 +4477,7 @@ DecentrEx.prototype.refresh = function refresh(callback, forceEventRead, initMar
       });
   });
 };
-DecentrEx.prototype.refreshLoop = function refreshLoop() {
+KapoEx.prototype.refreshLoop = function refreshLoop() {
   const self = this;
   function loop() {
     self.refresh(() => {
@@ -4486,7 +4486,7 @@ DecentrEx.prototype.refreshLoop = function refreshLoop() {
   }
   loop();
 };
-DecentrEx.prototype.initDisplays = function initDisplays(callback) {
+KapoEx.prototype.initDisplays = function initDisplays(callback) {
   this.loading(() => {});
   this.displayTokenGuidesDropdown(() => {});
   this.displayConnectionDescription(() => {});
@@ -4500,7 +4500,7 @@ DecentrEx.prototype.initDisplays = function initDisplays(callback) {
     true,
     true);
 };
-DecentrEx.prototype.loadWeb3 = function loadWeb3(callback) {
+KapoEx.prototype.loadWeb3 = function loadWeb3(callback) {
   this.config = config;
   // web3
   if (typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
@@ -4553,7 +4553,7 @@ DecentrEx.prototype.loadWeb3 = function loadWeb3(callback) {
     callback();
   }
 };
-DecentrEx.prototype.initContracts = function initContracts(callback) {
+KapoEx.prototype.initContracts = function initContracts(callback) {
   this.web3.version.getNetwork((error, version) => {
     if (!error && version && Number(version) !== 1 && configName !== 'testnet') {
       this.alertError('You are connected to the Ethereum testnet. Please connect to the Ethereum mainnet.');
@@ -4583,7 +4583,7 @@ DecentrEx.prototype.initContracts = function initContracts(callback) {
     // const eventsCacheCookie = utility.readCookie(this.config.eventsCacheCookie);
     // if (eventsCacheCookie) eventsCache = JSON.parse(eventsCacheCookie);
     // connection
-    this.config.contractDecentrExAddr = this.config.contractDecentrExAddrs[0].addr;
+    this.config.contractKapoExAddr = this.config.contractKapoExAddrs[0].addr;
     // get accounts
     this.web3.eth.defaultAccount = this.config.ethAddr;
     this.web3.eth.getAccounts((e, accounts) => {
@@ -4599,10 +4599,10 @@ DecentrEx.prototype.initContracts = function initContracts(callback) {
     // load contract
     utility.loadContract(
       this.web3,
-      this.config.contractDecentrEx,
-      this.config.contractDecentrExAddr,
-      (err, contractDecentrEx) => {
-        this.contractDecentrEx = contractDecentrEx;
+      this.config.contractKapoEx,
+      this.config.contractKapoExAddr,
+      (err, contractKapoEx) => {
+        this.contractKapoEx = contractKapoEx;
         utility.loadContract(
           this.web3,
           this.config.contractToken,
@@ -4642,7 +4642,7 @@ DecentrEx.prototype.initContracts = function initContracts(callback) {
       });
   });
 };
-DecentrEx.prototype.startDecentrEx = function startDecentrEx() {
+KapoEx.prototype.startKapoEx = function startKapoEx() {
   console.log('Beginning init', new Date());
   this.loadWeb3(() => {
     console.log('Web3 done', new Date());
@@ -4656,9 +4656,9 @@ DecentrEx.prototype.startDecentrEx = function startDecentrEx() {
   });
 };
 
-const decentrEx = new DecentrEx();
+const KapoEx = new KapoEx();
 
-module.exports = { DecentrEx: decentrEx, utility };
+module.exports = { KapoEx: KapoEx, utility };
 
 }).call(this,require("buffer").Buffer)
 },{"./common/utility.js":1,"./config.js":2,"./config_testnet.js":3,"./translations.js":323,"async":12,"async/dist/async.min.js":13,"bignumber.js":18,"buffer":373,"datejs":64,"js-sha256":153,"web3":272}],5:[function(require,module,exports){
@@ -36405,7 +36405,7 @@ module.exports={
         "spec": ">=6.2.3 <7.0.0",
         "type": "range"
       },
-      "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/secp256k1"
+      "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/secp256k1"
     ]
   ],
   "_from": "elliptic@>=6.2.3 <7.0.0",
@@ -36439,7 +36439,7 @@ module.exports={
   "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
   "_shrinkwrap": null,
   "_spec": "elliptic@^6.2.3",
-  "_where": "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/secp256k1",
+  "_where": "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/secp256k1",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -65393,7 +65393,7 @@ module.exports={
         "spec": ">=5.1.0 <6.0.0",
         "type": "range"
       },
-      "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/keythereum"
+      "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/keythereum"
     ]
   ],
   "_from": "elliptic@>=5.1.0 <6.0.0",
@@ -65424,7 +65424,7 @@ module.exports={
   "_shasum": "fa294b6563c6ddbc9ba3dc8594687ae840858f10",
   "_shrinkwrap": null,
   "_spec": "elliptic@^5.1.0",
-  "_where": "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/keythereum",
+  "_where": "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/keythereum",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -88896,7 +88896,7 @@ module.exports={
         "spec": ">=2.2.0 <2.3.0",
         "type": "range"
       },
-      "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/request"
+      "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/request"
     ]
   ],
   "_from": "tough-cookie@>=2.2.0 <2.3.0",
@@ -88930,7 +88930,7 @@ module.exports={
   "_shasum": "c83a1830f4e5ef0b93ef2a3488e724f8de016ac7",
   "_shrinkwrap": null,
   "_spec": "tough-cookie@~2.2.0",
-  "_where": "/Users/zackcoburn/Sites/live/decentrex.github.io/node_modules/request",
+  "_where": "/Users/zackcoburn/Sites/live/KapoEx.github.io/node_modules/request",
   "author": {
     "name": "Jeremy Stashewsky",
     "email": "jstashewsky@salesforce.com"
@@ -102287,17 +102287,17 @@ module.exports = {
     es: 'Español',
   },
   title: {
-    en: 'DecentrEx',
-    cn: 'DecentrEx',
-    fr: 'DecentrEx',
-    es: 'DecentrEx',
+    en: 'KapoEx',
+    cn: 'KapoEx',
+    fr: 'KapoEx',
+    es: 'KapoEx',
   },
   description: {
-    en: 'DecentrEx is a decentralized exchange for Ethereum tokens.',
-    cn: 'DecentrEx是去中心化的以太坊交易平台。',
-    fr: "DecentrEx est une bourse d'échange de jetons ethereum décentralisé.",
-    es: 'DecentrEx se ha posicionado como la primera bolsa de cambio de cryptomonedas y symbolicos de la blockchain Ethereum.',
-    // cn:'DecentrEx是无中心的以太坊交易平台。'
+    en: 'KapoEx is a decentralized exchange for Ethereum tokens.',
+    cn: 'KapoEx是去中心化的以太坊交易平台。',
+    fr: "KapoEx est une bourse d'échange de jetons ethereum décentralisé.",
+    es: 'KapoEx se ha posicionado como la primera bolsa de cambio de cryptomonedas y symbolicos de la blockchain Ethereum.',
+    // cn:'KapoEx是无中心的以太坊交易平台。'
   },
   Smart_Contract: {
     en: 'Smart Contract',
@@ -102366,10 +102366,10 @@ module.exports = {
     es: 'Profundidad',
   },
   only_7_days: {
-    en: 'Note: DecentrEx will only show recent transactions.',
-    cn: '注意：DecentrEx只会显示最近的交易。',
-    fr: 'Remarque: DecentrEx affichera uniquement les transactions récentes.',
-    es: 'Nota: DecentrEx sólo mostrará transacciones recientes.',
+    en: 'Note: KapoEx will only show recent transactions.',
+    cn: '注意：KapoEx只会显示最近的交易。',
+    fr: 'Remarque: KapoEx affichera uniquement les transactions récentes.',
+    es: 'Nota: KapoEx sólo mostrará transacciones recientes.',
   },
 
   announcements: {
@@ -102430,12 +102430,12 @@ module.exports = {
     fr: 'Produit par Etherboost',
     es: 'Producido por Etherboost',
   },
-  decentrex_desc: {
-    en: 'DecentrEx &#8212; decentralized token exchange',
-    cn: 'DecentrEx &#8212; 去中心化交易',
-    // cn:'DecentrEx &#8212; 无中心交易'
-    fr: 'DecentrEx &#8212; échange de jetons décentralisé',
-    es: 'DecentrEx &#8212; échange de jetons décentralisé',
+  KapoEx_desc: {
+    en: 'KapoEx &#8212; decentralized token exchange',
+    cn: 'KapoEx &#8212; 去中心化交易',
+    // cn:'KapoEx &#8212; 无中心交易'
+    fr: 'KapoEx &#8212; échange de jetons décentralisé',
+    es: 'KapoEx &#8212; échange de jetons décentralisé',
   },
   etheropt_desc: {
     en: 'EtherOpt &#8212; decentralized options exchange',
@@ -102623,10 +102623,10 @@ module.exports = {
     es: '3 Agosto, 2016',
   },
   aug032016_announcement: {
-    en: 'DecentrEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
-    cn: 'DecentrEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
-    // cn:'DecentrEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
-    fr: "DecentrEx a ete modifié pour un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il reste du solde à retirer.",
+    en: 'KapoEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
+    cn: 'KapoEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
+    // cn:'KapoEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
+    fr: "KapoEx a ete modifié pour un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il reste du solde à retirer.",
   },
   aug302016: {
     en: 'August 30, 2016',
@@ -102635,11 +102635,11 @@ module.exports = {
     es: '30 Agosto 2016',
   },
   aug302016_announcement: {
-    en: 'DecentrEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
-    cn: 'DecentrEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
-    // cn:'DecentrEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
-    fr: "DecentrEx utilise un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il vous reste du solde à retirer.",
-    es: 'DecentrEx utiliza un nuevo contrato inteligente.',
+    en: 'KapoEx has moved to a new smart contract. Go to the bottom of the page and switch to the old one if you have a balance there you need to withdraw.',
+    cn: 'KapoEx更新了智能合约。如果你要提取余额，请到本页底部转成旧的合约并进行提取。',
+    // cn:'KapoEx迁移到了新的智能合约。如果你要提取余额，请到本页底部转成旧的。'
+    fr: "KapoEx utilise un nouveau smart contract. Allez au bas de page et permutez le avec l'ancien s'il vous reste du solde à retirer.",
+    es: 'KapoEx utiliza un nuevo contrato inteligente.',
   },
   new_account: {
     en: 'New account',
@@ -102701,11 +102701,11 @@ module.exports = {
     fr: 'Portefeuille',
     es: 'Cartera',
   },
-  balance_decentrex: {
-    en: 'DecentrEx',
-    cn: 'DecentrEx',
-    fr: 'DecentrEx',
-    es: 'DecentrEx',
+  balance_KapoEx: {
+    en: 'KapoEx',
+    cn: 'KapoEx',
+    fr: 'KapoEx',
+    es: 'KapoEx',
   },
   amount: {
     en: 'Amount',
@@ -102889,9 +102889,9 @@ module.exports = {
     es: 'Arriba a la izquierda, hay dos menús desplegables para usar para seleccionar el par de divisas para intercambiar.',
   },
   deposit_withdraw_2: {
-    en: 'Under "Balances," you will see your balance for each of the two currencies you selected. This is the balance you have deposited to DecentrEx from your Ethereum account.',
+    en: 'Under "Balances," you will see your balance for each of the two currencies you selected. This is the balance you have deposited to KapoEx from your Ethereum account.',
     cn: '在“余额”下面，你可以看到两种币的各自的余额，这是从你的以太坊账号充值的余额。',
-    fr: 'Sous "Soldes" vous trouverez le solde pour chacune des deux devises selectionnées. C\'est le solde que vous venez de déposer sur decentrex depuis votre compte Ethereum',
+    fr: 'Sous "Soldes" vous trouverez le solde pour chacune des deux devises selectionnées. C\'est le solde que vous venez de déposer sur KapoEx depuis votre compte Ethereum',
     es: 'En "Saldos" se encuentra el equilibrio para cada una de las dos monedas sélectionnées.',
   },
   deposit_withdraw_3: {
@@ -102901,10 +102901,10 @@ module.exports = {
     es: 'Para depositar, retirar o transferencia, por favor Desplazamiento en la parte inferior de la página. Busque la sección "Ventas.',
   },
   deposit_withdraw_4: {
-    en: 'To deposit, click the "Deposit" tab, pick a token, enter an amount you would like to deposit from your Ethereum account into DecentrEx, and click "Deposit."',
-    cn: '充值点“充值”，选择一种币，输入从以太坊账号进入DecentrEx的充值数量，再点“充值”。',
-    fr: 'Pour déposer, cliquer sur "Deposit" tab, choisir un jeton, entrer le montant à déposer depuis votre compte Ethereum vers Decentrex, puis cliquer "Deposit".',
-    es: 'Para abonar, haga clic en la pestaña "depósito", elegir un modo, ingrese la cantidad a depositar desde su cuenta a Etereum Decentrex y haga clic en "depósito.',
+    en: 'To deposit, click the "Deposit" tab, pick a token, enter an amount you would like to deposit from your Ethereum account into KapoEx, and click "Deposit."',
+    cn: '充值点“充值”，选择一种币，输入从以太坊账号进入KapoEx的充值数量，再点“充值”。',
+    fr: 'Pour déposer, cliquer sur "Deposit" tab, choisir un jeton, entrer le montant à déposer depuis votre compte Ethereum vers KapoEx, puis cliquer "Deposit".',
+    es: 'Para abonar, haga clic en la pestaña "depósito", elegir un modo, ingrese la cantidad a depositar desde su cuenta a Etereum KapoEx y haga clic en "depósito.',
   },
   deposit_withdraw_5: {
     en: 'To withdraw, use the "Withdraw" tab.',
@@ -102937,10 +102937,10 @@ module.exports = {
     es: 'Es posible que el comercio un símbolo que no aparece en la lista, seleccione "Otros" y rellena los campos del formulario. Differentes simbolicos tienen differentes multiplicadores, es pues indispensable cumplir el formulario con cuidado.',
   },
   trade_3: {
-    en: 'DecentrEx supports resting orders (adding liquidity) and trading against existing resting orders (taking liquidity).',
-    cn: 'DecentrEx支持“待定下单”（resting order）来增加流动性，以及交易“待定下单”来减少流动性。',
-    fr: "DecentrEx supportes les ordres restant (l'ajout de liquidite) et marchander contre des ordres restant (prise de liquidite).",
-    es: 'DecentrEx apoya descansando órdenes tales como la adición de liquidez y el comercio contre órdenes existentes como descansando Tomando liquidez..',
+    en: 'KapoEx supports resting orders (adding liquidity) and trading against existing resting orders (taking liquidity).',
+    cn: 'KapoEx支持“待定下单”（resting order）来增加流动性，以及交易“待定下单”来减少流动性。',
+    fr: "KapoEx supportes les ordres restant (l'ajout de liquidite) et marchander contre des ordres restant (prise de liquidite).",
+    es: 'KapoEx apoya descansando órdenes tales como la adición de liquidez y el comercio contre órdenes existentes como descansando Tomando liquidez..',
   },
   trade_4: {
     en: 'To create a resting order, fill out the "Buy" or "Sell" form at the top of the page. The order expires in the number of blocks you specify (1 block &#8776; 15 seconds).',
@@ -102955,10 +102955,10 @@ module.exports = {
     es: 'Si desea cancelar su pedido, simplemente haga clic en su pedido aparecerá en el libro de órdenes y pulse el botón "Cancelar". Esto enviará una transacción Ethereum, una vez confirmada, canceló la orden. Cabe señalar que induce un coste de gas (Tarifas de transacción Ethereum), mientras que la colocación de un pedido restante hasta su expiración no cuesta de gas.',
   },
   trade_6: {
-    en: 'When you submit a resting order, it gets broadcast to the world. The current broadcast channel is a Gitter chat room, but DecentrEx also supports using Ethereum events as a fallback broadcast mechanism.',
-    cn: '但你提交了一个“待定下单”后，它会广播到全球。现在的传播渠道是Gitter聊天室，但是DecentrEx也支持以太坊事件机制，用来保底。',
-    fr: "Quand vous soumettez un ordre restant, il se diffuse dans le monde entier. Le canal de causerie principal s'appele Gitter chat room, mais Decentrex supporte egalement des evenements ethereum en tant que moyen de diffusion alternative.",
-    es: 'Cuando se envía una orden de reposo, que se transmitió al mundo. El canal de difusión actual es una sala de chat Gitter, Decentrex también promueve eventos Ethereum como un medio alternativo de distribución.',
+    en: 'When you submit a resting order, it gets broadcast to the world. The current broadcast channel is a Gitter chat room, but KapoEx also supports using Ethereum events as a fallback broadcast mechanism.',
+    cn: '但你提交了一个“待定下单”后，它会广播到全球。现在的传播渠道是Gitter聊天室，但是KapoEx也支持以太坊事件机制，用来保底。',
+    fr: "Quand vous soumettez un ordre restant, il se diffuse dans le monde entier. Le canal de causerie principal s'appele Gitter chat room, mais KapoEx supporte egalement des evenements ethereum en tant que moyen de diffusion alternative.",
+    es: 'Cuando se envía una orden de reposo, que se transmitió al mundo. El canal de difusión actual es una sala de chat Gitter, KapoEx también promueve eventos Ethereum como un medio alternativo de distribución.',
   },
   trade_7: {
     en: 'The GUI scans for new orders being broadcast and displays them in the order book (offers on the left, bids on the right).',
@@ -102967,10 +102967,10 @@ module.exports = {
     es: 'La interfaz gráfica de usuario detecta nuevos pedidos recibidos y que se muestran en el libro de orden (izquierda venta, compra derecha).',
   },
   trade_8: {
-    en: 'A resting order represents a cryptographically signed intent to trade. Up until your order expires or is cancelled, anyone who has seen it can trade against it, assuming both traders have enough funds in their DecentrEx accounts. The GUI filters out orders that do not have funds to back them up. Partial fills are supported.',
+    en: 'A resting order represents a cryptographically signed intent to trade. Up until your order expires or is cancelled, anyone who has seen it can trade against it, assuming both traders have enough funds in their KapoEx accounts. The GUI filters out orders that do not have funds to back them up. Partial fills are supported.',
     cn: '“待定下单”代表加密签名过的交易意向。在你的订单过期或取消以前，看见这个订单的任何人可以与它交易（前提是双方账号中有足够的币）。页面会过滤掉币的数量不够的订单。订单也可以部分成交。',
-    fr: "Un ordre restant represente une intention de commercer cryptographiquement signée. Jusqu'à ce que votre commande expire ou soit annulée, quiconque l'a vu peut échanger contre elle, en supposant que les deux commerçants disposent de suffisamment de fonds dans leurs comptes DecentrEx. Le remplissage partiel de l'ordre est egalement supporte.",
-    es: 'Una orden restante representa intención de negociar, firmado criptográficamente. Hasta que el pedido se cancela o expira, cualquiera puede intercambiar sierra en contra de ella, suponiendo que ambos operadores tienen fondos suficientes en sus cuentas DecentrEx. También se admite el llenado parcial de la orden.',
+    fr: "Un ordre restant represente une intention de commercer cryptographiquement signée. Jusqu'à ce que votre commande expire ou soit annulée, quiconque l'a vu peut échanger contre elle, en supposant que les deux commerçants disposent de suffisamment de fonds dans leurs comptes KapoEx. Le remplissage partiel de l'ordre est egalement supporte.",
+    es: 'Una orden restante representa intención de negociar, firmado criptográficamente. Hasta que el pedido se cancela o expira, cualquiera puede intercambiar sierra en contra de ella, suponiendo que ambos operadores tienen fondos suficientes en sus cuentas KapoEx. También se admite el llenado parcial de la orden.',
   },
   trade_9: {
     en: 'To trade against an existing resting order, click "Buy" or "Sell" next to it in the order book and type in the volume you want to trade. The GUI will do one last check that the trade can cross (the funds are there and the order hasn\'t already traded), but if someone submits a transaction right before you do, your Ethereum transaction will fail because the order already traded.',
