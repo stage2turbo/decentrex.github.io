@@ -3,4 +3,4 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /templates/
 Disallow: /help/
-Sitemap: https://KapoEx.com/sitemap.xml
+Sitemap: https://kapoex.github.io/sitemap.xml

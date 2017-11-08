@@ -1,7 +1,7 @@
 /* eslint-env browser */
 
 module.exports = {
-  homeURL: 'https://KapoEx.com',
+  homeURL: 'https://kapoex.github.io',
   contractKapoEx: 'smart_contract/KapoEx.sol',
   contractToken: 'smart_contract/token.sol',
   contractReserveToken: 'smart_contract/reservetoken.sol',
@@ -19,7 +19,7 @@ module.exports = {
   gasTrade: 250000,
   gasOrder: 250000,
   ordersOnchain: false,
-  apiServer: 'https://api.KapoEx.com',
+  apiServer: 'https://api.kapoex.github.io',
   userCookie: 'KapoEx',
   eventsCacheCookie: 'KapoEx_eventsCache',
   deadOrdersCacheCookie: 'KapoEx_deadOrdersCache',
